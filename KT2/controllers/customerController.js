@@ -54,8 +54,14 @@ module.exports = {
     addCustomer : async (req,res) =>{
         try{
             let customer;
+            if(req.body.NIMI != "" & req.body.OSOITE != "" & req.body.POSTINRO != "" & req.body.POSTITMP != "" &
+            req.body.LUONTIPVM != "" & req.body.ASTY_AVAIN != null){
             customer = await sql.addCustomerData(req.body);
             res.json({status : "OK", response : customer});
+            }
+            else{
+                res.json({status : "Error", msg : "textfields cannot be empty"})
+            }
         }
         catch(error){
             res.json({status : "not ok", msg : error});
