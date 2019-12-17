@@ -7,8 +7,12 @@ const ctrl = require('../controllers/customerController');
 
 router.route('/asiakas')
     .get(ctrl.fetch)
-    .post(ctrl.addCustomer);
+    .post(ctrl.addCustomer)
+
+router.route('/asiakas/:id')
+    .delete(ctrl.deleteCustomer)
+    .put(ctrl.updateCustomer)
 router.route('/asiakastyyppi')
     .get(ctrl.fetchType)
-    //Julkaistaan router-funktio tämän filun ulkopuolelle (kapselointi)
+ 
 module.exports = router;
