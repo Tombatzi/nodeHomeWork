@@ -108,7 +108,7 @@ module.exports = {
             let data = req.body;
             console.log(data);
             let resData = await sql.updateCustomerData(id, data);
-            res.json({msg : resData})
+            res.json({status : "OK", msg: "customer data changed", response : resData});
         }
         catch(error){
             res.statusCode = 404;
