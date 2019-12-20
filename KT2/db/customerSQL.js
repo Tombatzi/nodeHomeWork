@@ -130,6 +130,7 @@ const delCustomer = (id) => {
         return new Promise((resolve,reject) => {
             let q;
             let params = [];
+
             q = "UPDATE asiakas set ";
             
             if (id != null) {
@@ -154,8 +155,10 @@ const delCustomer = (id) => {
                     q+= ", ASTY_AVAIN = ? "
                     params.push(data.ASTY_AVAIN);
                 }
-                q+= "WHERE AVAIN = "+id;
+                q+= "WHERE MUUTOSPVM = '" + data.MUUTOSPVM + "' AND AVAIN = " +id ;
+                
             }
+            date = data.MUUTOSPVM
 
             console.log("query: ",q);
             
