@@ -19,7 +19,7 @@ const addStudent = (data) => {
             q = "INSERT INTO student (etunimi, sukunimi, postinro, osoite_idosoite, typeid) " +
                 " VALUES(?, ?, ?, ?, ?) ";
 
-            params.push(data.etunimi, data.sukunimi, data.postinro, data.osoite_idosoite, data.typeid);
+            params.push(data.etunimi, data.sukunimi, data.postinro, data.osoite, data.tyyppi);
             console.log(params);
             console.log("query: ", q);
         
@@ -34,6 +34,33 @@ const addStudent = (data) => {
                 console.log("result", result);
             }
         })
+    });
+}
+
+const addStudentAddress = (address) => {
+    return new Promise((resolve, reject) => {
+        
+        let params = [];
+        let q;
+
+        q = "INSERT INTO osoite (lahiosoite) VALUES(?)"
+
+        if(address != null) {
+            params.push(address);
+        }
+        console.log("query:", q);
+
+        connection.query(q, params, function (error, result, fields) {
+
+            if(error) {
+                reject(error);
+                console.log("Error: ", error);
+            }
+            else {
+                resolve(result);
+                console.log("result", result);
+            }
+        });
     });
 }
 const getStudentName = (firstname, lastname) => {
@@ -72,6 +99,33 @@ const getStudentName = (firstname, lastname) => {
     });
 }
 
+const getStudentAddress = (address) => {
+
+    console.log("address:", address)
+    return new Promise((resolve,reject) => {
+
+        let q = "SELECT idosoite, lahiosoite from osoite "
+
+        if(address != null){
+            q += " WHERE lahiosoite = '" + address + "'";
+        }
+
+        console.log("query: ", q)
+
+        connection.query(q, function(error, result, fields) {
+
+            if(error){
+                console.log("Errro: ", error);
+                reject(error);
+            }
+            else{
+                console.log("result: ", result);
+                resolve(result);
+            }
+        })
+    });
+}
+
 
 
 
@@ -81,7 +135,13 @@ module.exports = {
     addStudentData: (data) => {
         return addStudent(data);
     },
+    addStudentDataAddress: (address) => {
+        return addStudentAddress(address);
+    },
     checkStudentName: (firstname, lastname) =>{
         return getStudentName(firstname, lastname);
+    },
+    checkStudentAddress: (address) =>{
+        return getStudentAddress(address);
     }
 }
