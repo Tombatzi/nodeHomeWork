@@ -1,0 +1,108 @@
+<html lang="en">
+<meta charset="utf-8">
+
+<head>
+
+  <link rel="stylesheet" type="text/css" href="jalkapallo.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/Redmond/jquery-ui.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+  <title>jQuery Ajax call</title>
+  <script>
+    $(function () {
+      // Ladataan tehtävän 29 tiedot serveriltä
+      $("#events").load("http://localhost:3000/tapahtumat");
+      
+      //TEHT30- ladataan tiedot serveriltä, kun linkkiä on painettu
+      $("#standings_link").click(function(){
+        $("#data").load("http://localhost:3000/sijoitukset");
+      });
+      
+      $("#teams_and_players_link").click(function(){
+        $("#data").load("http://localhost:3000/joukkueet_pelaajat");
+      });
+
+      $("#playerInfo_link").click(function(){
+        $("#data").load("http://localhost:3000/joukkueet");
+      });
+    });
+    //TEHT 32
+    $(document).on("click",".player",function(){
+        let id =  this.id;
+        console.log("id = "+ id);
+        $(".players").load("http://localhost:3000/pelaajat?id="+id);
+   
+      });
+    
+   
+        
+   
+
+
+  </script>
+</head>
+
+<body>
+  <div class="grid-container">
+
+    <div class="header">
+      <h2>Jalkapallo-Sivusto</h2>
+      <select>
+        {{#each navOption}}
+        <option>{{this}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="left_panel">
+      <ul>
+        <li>
+          <a id="standings_link" href="#">Sarjataulukko</a>
+        </li>
+        <li>
+          <a id="teams_and_players_link" href="#">Joukkueet ja pelaajat</a>
+        </li>
+        <li>
+          <a id="playerInfo_link" href="#">Tietoa pelaajista</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main">
+      <div id="data">
+      <h2>Valitse vasemmalta</h2>
+      </div>
+    </div>
+
+    <div class="right_panel">
+      <h2>Tapahtumat</h2>
+     
+      <!-- TEHTÄVÄ 28
+       <ul>
+        {{#each events}}
+        <li>{{this.Pvm}} : {{this.Selite}}</li>
+        {{/each}}
+      </ul>-->
+
+      <!--TEHTÄVÄ 29 ALLA-->
+      <div id="events"> 
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <h2>Info and Stuff</h2>
+      <h3>Handlebars Tehtävät</h3>
+    </div>
+
+  </div>
+  
+
+</body>
+
+</html>

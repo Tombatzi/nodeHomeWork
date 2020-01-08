@@ -1,0 +1,19 @@
+<div class="players">
+   
+    <ol>
+        <h4>Pelaajat</h4>
+        {{#each players}}
+        <li>{{this.Sukunimi}}, {{this.Etunimi}}, {{this.Pelinumero}}</li>
+        {{/each}}
+    </ol>
+</div>
+
+<div class="teams">
+    
+    <ul>
+        <h4>Joukkueet</h4>
+        {{#each teams}}
+        <li>{{this.Nimi}}, {{this.Kaupunki}}, {{this.Perustamisvuosi}}</li>
+        {{/each}}
+    </ul>
+</div>
