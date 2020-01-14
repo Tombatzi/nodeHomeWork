@@ -176,7 +176,7 @@ const getStudentPostalcode = (postalcode) => {
 
     return new Promise((resolve, reject) => {
         console.log("oistunumero", postalcode);
-        let q = "SELECT postinumero from postinro ";
+        let q = "SELECT * from postinro ";
 
         if (postalcode != null) {
             q += " WHERE postinumero = '" + postalcode + "'";

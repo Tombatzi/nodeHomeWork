@@ -10,5 +10,7 @@ router.route('/student')
     .get(ctrl.getStudent);
 router.route('/studenttype')
     .get(ctrl.getStudentType)
+router.route('/studentpostalcode')
+    .get(ctrl.getPostalCodes)
  
 module.exports = router;

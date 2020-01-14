@@ -99,7 +99,7 @@ module.exports = {
                     let studentData = { etunimi: firstname, sukunimi: lastname, postinro: postalcode, osoite: address, tyyppi: typeid }
                     await sql.addStudentData(studentData);
                     res.statusCode = 200;
-                    res.json({ status: "OK", response: "student added" });
+                    res.json({ status: "OK", response: "student added", msg : "student added to db" });
                 }
                 else {
                     res.statusCode = 400;
@@ -171,5 +171,23 @@ module.exports = {
             res.statusCode = 400;
             res.json({ status: "NOT OK", msg: error });
         }
+    },
+    getPostalCodes: async (req,res) => {
+
+        try{
+            let postalcodes;
+
+            postalcodes = await sql.checkStudentPostalcode();
+            res.statusCode = 200;
+            res.json({ status: "OK", response: postalcodes });
+        }
+        catch(error){
+            res.statusCode = 400;
+            res.json({ status: "NOT OK", msg: error });
+        }
+    },
+    getCounties: async (req,res) => {
+
     }
+
 }
